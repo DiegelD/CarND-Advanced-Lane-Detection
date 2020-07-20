@@ -15,25 +15,35 @@ You're not required to use markdown for your writeup.  If you use another method
 The Project
 ---
 
-The goals / steps of this project are the following:
+The steps of this project are the following:
 
-* Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
-* Apply a distortion correction to raw images.
-* Use color transforms, gradients, etc., to create a thresholded binary image.
-* Apply a perspective transform to rectify binary image ("birds-eye view").
-* Detect lane pixels and fit to find the lane boundary.
-* Determine the curvature of the lane and vehicle position with respect to center.
-* Warp the detected lane boundaries back onto the original image.
-* Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
+1) Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
+2) Apply a distortion correction to raw images.
+3) Use color transforms, gradients, etc., to create a thresholded binary image.
+4) Apply a perspective transform to rectify binary image ("birds-eye view").
+5) Detect lane pixels and fit to find the lane boundary.
+6) Determine the curvature of the lane and vehicle position with respect to center.
+7) Warp the detected lane boundaries back onto the original image.
+8) Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
-The images for camera calibration are stored in the folder called `camera_cal`.  The images in `test_images` are for testing your pipeline on single frames.  If you want to extract more test images from the videos, you can simply use an image writing method like `cv2.imwrite()`, i.e., you can read the video in frame by frame as usual, and for frames you want to save for later you can write to an image file.  
+The images for camera calibration are stored in the folder called `camera_cal`.  The images in `test_images` are for testing your pipeline on single frames.
 
-To help the reviewer examine your work, please save examples of the output from each stage of your pipeline in the folder called `output_images`, and include a description in your writeup for the project of what each image shows.    The video called `project_video.mp4` is the video your pipeline should work well on.  
+Output: In the folder `cam_params` are the camera parameters saved. The output of the camera calibration Process is stored under `output_images/camera_cal`. And all the other images for developing the pipeline are saved in `output_images`.
 
-The `challenge_video.mp4` video is an extra (and optional) challenge for you if you want to test your pipeline under somewhat trickier conditions.  The `harder_challenge.mp4` video is another optional challenge and is brutal!
+The `challenge_video.mp4` video is an extra (and optional) challenge for you if you want to test your pipeline under somewhat trickier conditions.  The `harder_challenge.mp4` video is another optional challenge and is brutal, therefore a deep learning is recomened!
 
-If you're feeling ambitious (again, totally optional though), don't stop there!  We encourage you to go out and take video of your own, calibrate your camera and show us how you would implement this project from scratch!
+## 1) Compute the camera calibration
+This part start with converting the chess board image to grayscale to reduce the image information. With `cv2.findChessboardCorners` the Corners are getting detected and with `cv2.drawChessboardCorners` drawn to the input image. 
+In the next step the chessboard get warped. For this the four source points `src` the mark the transformed area and the destination points (must be listed in the same order as src points!) `dst`, the points where it should be transformed to a defined. With `cv2.getPerspectiveTransform()` the trasformation Matrix `M` is computed and applied with `cv2.warpPerspective()` to wrap the image.
 
-## How to write a README
-A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
+<figure>
+ <img src="./output_images/material_for_readme/CameraCalibration.png" width="380" alt="Camera_Calibration" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 1.1: Camera calibration prozess. Left the orginal chess board image. In the middel the draw detected cornes. On the right the unwraped chessboard using the transformation Matrix.</p> 
+ </figcaption>
+</figure>
+ <p></p>
+
+
 
