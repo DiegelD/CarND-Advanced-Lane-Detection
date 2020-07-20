@@ -37,7 +37,7 @@ This part start with converting the chess board image to grayscale to reduce the
 In the next step the chessboard get warped. For this the four source points `src` the mark the transformed area and the destination points (must be listed in the same order as src points!) `dst`, the points where it should be transformed to a defined. With `cv2.getPerspectiveTransform()` the trasformation Matrix `M` is computed and applied with `cv2.warpPerspective()` to wrap the image.
 
 <figure>
- <img src="./output_images/material_for_readme/CameraCalibration.png" width="380" alt="Camera_Calibration" />
+ <img src="./output_images/material_for_readme/CameraCalibration.png" width="760" alt="Camera_Calibration" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 1.1: Camera calibration prozess. Left the orginal chess board image. In the middel the draw detected cornes. On the right the unwraped chessboard using the transformation Matrix.</p> 
