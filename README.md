@@ -44,6 +44,18 @@ In the next step the chessboard get warped. For this the four source points `src
  </figcaption>
 </figure>
  <p></p>
+  
+## 3) Use color transforms, gradients
+The function `Sobel__SSpace_pipeline` is applying a gradient and S-Channel treshold. First it applies the gradient threshold with the use of a Sobel filter in x-direction`cv2.Sobel(gray, cv2.CV_64F, 1, 0)`. Second it transformes the orginal image into HSL-Space `cv2.cvtColor(img, cv2.COLOR_RGB2HLS)` to apply the a threshold logic `s_binary[(s_channel >= s_thresh[0]) & (s_channel <= s_thresh[1])] = 1` for the S-Channel to detect the saturation of the street colors and with this the colores lines. The function  finnish by combining the two binary thresholds as output image.
+
+<figure>
+ <img src="./output_images/material_for_readme/Sobel_SSpaceFilter_Apply.png.png" width="760" alt="Image_Filter" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 1.1: Filter prozess. Left the orginal function input image. In the middel the influence of the two filters. To show this image `np.dstack` is used to stack the filters together. In blue is the influence of the S-Chennal Threshold seen.On the right is the combined threshold of the two filters seen..</p> 
+ </figcaption>
+</figure>
+ <p></p>
 
 
 
