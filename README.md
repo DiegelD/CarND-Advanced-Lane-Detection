@@ -18,9 +18,9 @@ The Project
 The steps of this project are the following:
 
 1) Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
-2) Apply a distortion correction to raw images.
-3) Use color transforms, gradients, etc., to create a thresholded binary image.
-4) Apply a perspective transform to rectify binary image ("birds-eye view").
+2) Use color transforms, gradients, etc., to create a thresholded binary image.
+3) Apply a perspective transform to rectify binary image ("birds-eye view").
+4) Apply a distortion correction to raw images.
 5) Detect lane pixels and fit to find the lane boundary.
 6) Determine the curvature of the lane and vehicle position with respect to center.
 7) Warp the detected lane boundaries back onto the original image.
@@ -40,19 +40,31 @@ In the next step the chessboard get warped. For this the four source points `src
  <img src="./output_images/material_for_readme/CameraCalibration.png" width="760" alt="Camera_Calibration" />
  <figcaption>
  <p></p> 
- <p style="text-align: center;"> Fig. 1.1: Camera calibration prozess. Left the orginal chess board image. In the middel the draw detected cornes. On the right the unwraped chessboard using the transformation Matrix.</p> 
+ <p style="text-align: center;"> Fig. 1.1: Camera calibration process. Left the orginal chess board image. In the middel the draw detected cornes. On the right the unwraped chessboard using the transformation Matrix.</p> 
  </figcaption>
 </figure>
  <p></p>
   
-## 3) Use color transforms, gradients
+## 2) Use color transforms, gradients
 The function `Sobel__SSpace_pipeline` is applying a gradient and S-Channel treshold. First it applies the gradient threshold with the use of a Sobel filter in x-direction`cv2.Sobel(gray, cv2.CV_64F, 1, 0)`. Second it transformes the orginal image into HSL-Space `cv2.cvtColor(img, cv2.COLOR_RGB2HLS)` to apply the a threshold logic `s_binary[(s_channel >= s_thresh[0]) & (s_channel <= s_thresh[1])] = 1` for the S-Channel to detect the saturation of the street colors and with this the colores lines. The function  finnish by combining the two binary thresholds as output image.
 
 <figure>
- <img src="./output_images/material_for_readme/Sobel_SSpaceFilter_Apply.png.png" width="760" alt="Image_Filter" />
+ <img src="./output_images/material_for_readme/Sobel_SSpaceFilter_Apply.png" width="760" alt="Image_Filter" />
  <figcaption>
  <p></p> 
- <p style="text-align: center;"> Fig. 2.1: Filter prozess. Left the orginal function input image. In the middel the influence of the two filters. To show this image `np.dstack` is used to stack the filters together. In blue is the influence of the S-Chennal Threshold seen.On the right is the combined threshold of the two filters seen..</p> 
+ <p style="text-align: center;"> Fig. 2.1: Filter process. Left the orginal function input image. In the middel the influence of the two filters. To show this image `np.dstack` is used to stack the filters together. In blue is the influence of the S-Chennal Threshold seen.On the right is the combined threshold of the two filters seen..</p> 
+ </figcaption>
+</figure>
+ <p></p>
+ 
+## 3 & 4) Apply a perspective transform to rectify binary image ("birds-eye view") + Apply a distortion correction to raw images.
+The function `Sobel__SSpace_pipeline` is applying a gradient and S-Channel treshold. First it applies the gradient threshold with the use of a Sobel filter in x-direction`cv2.Sobel(gray, cv2.CV_64F, 1, 0)`. Second it transformes the orginal image into HSL-Space `cv2.cvtColor(img, cv2.COLOR_RGB2HLS)` to apply the a threshold logic `s_binary[(s_channel >= s_thresh[0]) & (s_channel <= s_thresh[1])] = 1` for the S-Channel to detect the saturation of the street colors and with this the colores lines. The function  finnish by combining the two binary thresholds as output image.
+
+<figure>
+ <img src="./output_images/material_for_readme/Undistored_Warped_Road_Area.png" width="760" alt="Wraped_Road" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 3.1: Wrape process. Left the orginal function input image. On the Left is the warped and undistored road area of interest in front of the car.</p> 
  </figcaption>
 </figure>
  <p></p>
