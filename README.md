@@ -52,7 +52,7 @@ The function `Sobel__SSpace_pipeline` is applying a gradient and S-Channel tresh
  <img src="./output_images/material_for_readme/Sobel_SSpaceFilter_Apply.png.png" width="760" alt="Image_Filter" />
  <figcaption>
  <p></p> 
- <p style="text-align: center;"> Fig. 1.1: Filter prozess. Left the orginal function input image. In the middel the influence of the two filters. To show this image `np.dstack` is used to stack the filters together. In blue is the influence of the S-Chennal Threshold seen.On the right is the combined threshold of the two filters seen..</p> 
+ <p style="text-align: center;"> Fig. 2.1: Filter prozess. Left the orginal function input image. In the middel the influence of the two filters. To show this image `np.dstack` is used to stack the filters together. In blue is the influence of the S-Chennal Threshold seen.On the right is the combined threshold of the two filters seen..</p> 
  </figcaption>
 </figure>
  <p></p>
