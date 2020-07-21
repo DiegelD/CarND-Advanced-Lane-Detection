@@ -46,7 +46,7 @@ The function *Sobel__SSpace_pipeline* is applying a gradient and S-Channel thres
  <img src="./output_images/material_for_readme/Sobel_SSpaceFilter_Apply.png" width="760" alt="Image_Filter" />
  <figcaption>
  <p></p> 
- <p style="text-align: center;"> Fig. 2.1: Fig. 2.1: Filter process. Left the original function input image. In the middle the influence of the two filters. To show this image `np.dstack` is used to stack the filters together. In blue is the influence of the S-Chennai Threshold seen. On the right is the combined threshold of the two filters seen.</p> 
+ <p style="text-align: center;"> Fig. 2.1: Filter process. Left the original function input image. In the middle the influence of the two filters. To show this image `np.dstack` is used to stack the filters together. In blue is the influence of the S-Chennai Threshold seen. On the right is the combined threshold of the two filters seen.</p> 
  </figcaption>
 </figure>
  <p></p>
@@ -63,5 +63,31 @@ The function *road_unwarp* is taking care of the distortion correction and of tr
 </figure>
  <p></p>
 
+## 5) Detect lane pixels and fit to find the lane boundary.
+Depending if the lanes have been detectet in the last pipline run, there will be two possible options. 
 
+### 5.1 Lane havent been detected in the last run
+With the warped image as input the code process the image as followed. The function **histogram** 
+detects the lane position start. First it sums all the detected pixels in x-direction up with `np.sum` and then second cumpute the starting point for the function **finde_lane_pixels** by giving out the position with the highest pixel density by `np.argmax(histogram[])`(Figure 5.1.1). The functions **find_lane_pixels** and **fit_polynomial**, which have been taken from udacity code and modifyed to process the images more efficient in the pipeline. They are detecting the pixcel outgoing from the start point in a defindet "window" and than fitting a polynominal through the foundet pixcel that represent the foundet lane line. For a deeper understanding have a look into the code P1 section 5 (Figure 5.1.2)
+
+<figure>
+ <img src="./output_images/material_for_readme/Undistored_Warped_Road_Area_Histogram.png" width="253" alt="Histogram" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 5.1.1: Histogram: The applied histogram to the warped image. The red dot displays the left lane positions. The yellow dashed line in the middle marks the middle of the image that refer to the car center. The blue dot displays the right founded lane line.</p> 
+ </figcaption>
+</figure>
+ <p></p>
+ 
+ <figure>
+ <img src="./output_images/material_for_readme/Sliding_Window_Polynomial.png" width="253" alt="Sliding Windows" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 5.1.2: Sliding Windows: Well displaysed the sliding windows in green and the detected pixels in red and blue with the fitted polynominal through the pixels.</p> 
+ </figcaption>
+</figure>
+ <p></p>
+ 
+
+### 5.2 Lane have been detected in the last run
 
