@@ -66,12 +66,12 @@ The function *road_unwarp* is taking care of the distortion correction and of tr
 ## 5) Detect lane pixels and fit to find the lane boundary.
 Depending if the lanes have been detectet in the last pipline run, there will be two possible options. 
 
-### 5.1 Lane havent been detected in the last run
+### 5.1 Lane haven't been detected in the last run
 With the warped image as input the code process the image as followed. The function **histogram** 
-detects the lane position start. First it sums all the detected pixels in x-direction up with `np.sum` and then second cumpute the starting point for the function **finde_lane_pixels** by giving out the position with the highest pixel density by `np.argmax(histogram[])`(Figure 5.1.1). The functions **find_lane_pixels** and **fit_polynomial**, which have been taken from udacity code and modifyed to process the images more efficient in the pipeline. They are detecting the pixcel outgoing from the start point in a defindet "window" and than fitting a polynominal through the foundet pixcel that represent the foundet lane line. For a deeper understanding have a look into the code P1 section 5 (Figure 5.1.2)
+detects the lane position start. First it sums all the detected pixels in x-direction up with `np.sum` and then second compute the starting point for the function **finde_lane_pixels** by giving out the position with the highest pixel density by `np.argmax(histogram[])`(Figure 5.1.1). The functions **find_lane_pixels** and **fit_polynomial**, which have been taken from Udacity code and modified to process the images more efficient in the pipeline. They are detecting the pixels outgoing from the start point in a defined "window" and then fitting a polynomial through the founded pixels that represent the founded lane line. For a deeper understanding have a look into the code P1 section 5 (Figure 5.1.2)
 
 <figure>
- <img src="./output_images/material_for_readme/Undistored_Warped_Road_Area_Histogram.png" width="253" alt="Histogram" />
+ <img src="./output_images/material_for_readme/Undistored_Warped_Road_Area_Histogram.png" width="360" alt="Histogram" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 5.1.1: Histogram: The applied histogram to the warped image. The red dot displays the left lane positions. The yellow dashed line in the middle marks the middle of the image that refer to the car center. The blue dot displays the right founded lane line.</p> 
@@ -80,14 +80,26 @@ detects the lane position start. First it sums all the detected pixels in x-dire
  <p></p>
  
  <figure>
- <img src="./output_images/material_for_readme/Sliding_Window_Polynomial.png" width="253" alt="Sliding Windows" />
+ <img src="./output_images/material_for_readme/Sliding_Window_Polynomial.png" width="360" alt="Sliding Windows" />
  <figcaption>
  <p></p> 
- <p style="text-align: center;"> Fig. 5.1.2: Sliding Windows: Well displaysed the sliding windows in green and the detected pixels in red and blue with the fitted polynominal through the pixels.</p> 
+ <p style="text-align: center;"> Fig. 5.1.2: Sliding Windows: Well displayed the sliding windows in green and the detected pixels in red and blue with the fitted polynomial through the pixels
+.</p> 
  </figcaption>
 </figure>
  <p></p>
  
 
 ### 5.2 Lane have been detected in the last run
+If the lane has been detected in the last run, the process goes easier this time. The pixels getting detected by taking the old polynomial and searching in a pre-considered area around them for the new pixels. The assumption behind, is that the lane will just change incrementally to the previous founded lane. This will be done with the function **search_around_poly**, the code has been taken from Udacity and modified to run more efficient in the pipeline.
+
+ <figure>
+ <img src="./output_images/material_for_readme/Search_Prio.png" width="360" alt="Search from Prio" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 5.2.1: Search from Prio: Well displaysed area of search in gree over the already deteced pixels.</p> 
+ </figcaption>
+</figure>
+ <p></p>
+
 
