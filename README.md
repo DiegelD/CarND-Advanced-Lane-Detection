@@ -97,9 +97,27 @@ If the lane has been detected in the last run, the process goes easier this time
  <img src="./output_images/material_for_readme/Search_Prio.png" width="360" alt="Search from Prio" />
  <figcaption>
  <p></p> 
- <p style="text-align: center;"> Fig. 5.2.1: Search from Prio: Well displaysed area of search in gree over the already deteced pixels.</p> 
+ <p style="text-align: center;"> Fig. 5.2.1: Search from Prio: Well displaysed, the area of search in green over the already deteced pixels.</p> 
+ </figcaption>
+</figure>
+ <p></p>
+
+## 6) Determine the curvature of the lane and vehicle position with respect to center
+This step contains three parts. The first one measurers curvature of the lane in **measure_curvature_real**. On the second part function **curvature_check** filters out curvatures that are not part of the US-Government Street regulation. This is due to just give out real curvatures. For example, if a curvature is bigger than 1221m is will be displayed as a straight. 
+And the third one calculates the vehicle position with respect to the lane center in **Lane_Position**. (This function will be founded in section 5.1. It’s there because the Figure 5.1.1 is using parts of this functions to display the lane position).
+
+## 7) & 8) Warp the detected lane boundaries back onto the original image + Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
+As last steps, the computed results have to be displayed on the original image. Therefore, the function **draw** will take care of warping the detected lines back to the full image and the visualization them. Finally, the numerical calculations from step 6 will be written with function **text_image** to the visualized image.
+
+
+ <figure>
+ <img src="./output_images/material_for_readme/Drawning_Final_Result.png" width="360" alt="Final Result" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;"> Fig. 8.1: Visualized lane lines: The area between the detected lane lines is covered in green. The actual car relative position to the lane center and the curvature are displayed.</p> 
  </figcaption>
 </figure>
  <p></p>
 
 
+ 
