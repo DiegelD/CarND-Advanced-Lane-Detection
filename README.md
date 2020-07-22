@@ -18,13 +18,15 @@ The steps of this project are the following:
 6) Determine the curvature of the lane and vehicle position with respect to center.
 7) Warp the detected lane boundaries back onto the original image.
 8) Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
+**Video-Pipline** This 
+
 
 The images for camera calibration are stored in the folder called `camera_cal`.  The images in `test_images` are for testing your pipeline on single frames.
 
 *Output:* In the folder `cam_params` are the camera parameters saved. The output of the camera calibration Process is stored under `output_images/camera_cal`. And all the other images for developing the pipeline are saved in `output_images`.
 
 The `challenge_video.mp4` video is an extra (and optional) challenge for you if you want to test your pipeline under somewhat trickier conditions.  The `harder_challenge.mp4` video is another optional challenge and is brutal, therefore a deep learning is recomened!
-
+# Function Development
 ## 1) Compute the camera calibration
 This part start with converting the chess board image to grayscale to reduce the image information. With `cv2.findChessboardCorners` the Corners are getting detected and with `cv2.drawChessboardCorners` drawn to the input image. 
 In the next step the chessboard get warped. For this the four source points `src` the mark the transformed area and the destination points (must be listed in the same order as src points!) `dst`, the points where it should be transformed to a defined. With `cv2.getPerspectiveTransform()` the transformation Matrix `M` is computed and applied with `cv2.warpPerspective()` to wrap the image.
@@ -109,7 +111,6 @@ And the third one calculates the vehicle position with respect to the lane cente
 ## 7) & 8) Warp the detected lane boundaries back onto the original image + Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 As last steps, the computed results have to be displayed on the original image. Therefore, the function **draw** will take care of warping the detected lines back to the full image and the visualization them. Finally, the numerical calculations from step 6 will be written with function **text_image** to the visualized image.
 
-
  <figure>
  <img src="./output_images/material_for_readme/Drawning_Final_Result.png" width="360" alt="Final Result" />
  <figcaption>
@@ -119,5 +120,11 @@ As last steps, the computed results have to be displayed on the original image. 
 </figure>
  <p></p>
 
+# Video Pipline
+To run the functions on a video stream, they have to be warped into a pipeline. The already described function are getting expanded by a smoothing and a sanity check method.
+The smoothing is done by taking the mean over n-polynomial values, that holed in a deque-stack in the function **smoothing_polynominal**.
+To check the sanity, function **sanity_check**, a tipple validation of the founded lane results is performed. If the deviation of the curvature is too high it fails. As well if the lanes are not parallel and the corresponding polynomials have a too high difference. The last check is done by proofing if the lane width is in a plausible area.
+
+The Project Example can be seen here[link](./output_videos/project_video.mp4).
 
  
