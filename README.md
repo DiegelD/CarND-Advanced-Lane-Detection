@@ -42,7 +42,7 @@ In the next step the chessboard get warped. For this the four source points `src
  <p></p>
   
 ## 2) Use color transforms, gradients
-The function *Sobel__SSpace_pipeline* is applying a gradient and S-Channel threshold. First it applies the gradient threshold with the use of a Sobel filter in x-direction`cv2.Sobel(gray, cv2.CV_64F, 1, 0)`. Second it transforms the original image into HSL-Space `cv2.cvtColor(img, cv2.COLOR_RGB2HLS)` to apply the a threshold logic `s_binary[(s_channel >= s_thresh[0]) & (s_channel <= s_thresh[1])] = 1` for the S-Channel to detect the saturation of the street colors and with this the colors lines. The function finish by combining the two binary thresholds as output image.
+The function **Sobel__SSpace_pipeline** is applying a gradient and S-Channel threshold. First it applies the gradient threshold with the use of a Sobel filter in x-direction`cv2.Sobel(gray, cv2.CV_64F, 1, 0)`. Second it transforms the original image into HSL-Space `cv2.cvtColor(img, cv2.COLOR_RGB2HLS)` to apply the a threshold logic `s_binary[(s_channel >= s_thresh[0]) & (s_channel <= s_thresh[1])] = 1` for the S-Channel to detect the saturation of the street colors and with this the colors lines. The function finish by combining the two binary thresholds as output image.
 
 <figure>
  <img src="./output_images/material_for_readme/Sobel_SSpaceFilter_Apply.png" width="760" alt="Image_Filter" />
@@ -120,11 +120,19 @@ As last steps, the computed results have to be displayed on the original image. 
 </figure>
  <p></p>
 
-# Video Pipline
+# Video Pipeline
+## Functionality
 To run the functions on a video stream, they have to be warped into a pipeline. The already described function are getting expanded by a smoothing and a sanity check method.
 The smoothing is done by taking the mean over n-polynomial values, that holed in a deque-stack in the function **smoothing_polynominal**.
 To check the sanity, function **sanity_check**, a tipple validation of the founded lane results is performed. If the deviation of the curvature is too high it fails. As well if the lanes are not parallel and the corresponding polynomials have a too high difference. The last check is done by proofing if the lane width is in a plausible area.
 
-The Project Example can be seen here[link](./output_videos/project_video.mp4).
+The Project Example can be seen here: [link](./output_videos/project_video.mp4). The Challanging video can bee seen here: [link](./output_videos/challenge_video.mp4).
+
+## Discussion
+**Project Video** The Pipeline works quiet well for the video. The lanes are getting smooth detected and there is no jitter of the detection. Improvements: At time 40 seconds the left line has an offset in the detection. For improving the parameters, the critical video part has been writing to an image and run through the pipeline. The conclusion was that the pipeline detected the lane pretty well, without offset. So, this is meaning that the parameter for the lane detection are working well. So, in a next step the fitting over time could be reduced. So that the adaption would be faster to changing conditions. 
+
+**Challenge Video** The Pipeline works here also pretty smooth. However, the right lane lines are getting hardly detected. Its visible that the detection is hitting areas with a high color gradient change.
+Improvements: To change the detection, it suggested to change the parameter setting of the function **Sobel__SSpace_pipeline** in two ways. First to increase the sx_thresh=(lower,higher) lower threshold of the sobel filter. This will force the filter to dismiss the darker regions of the image. Second to s_thresh=(lower, higher)to decrease the lower s_threshold. With this even the lower saturated lane values will be detected. This is important for this video because the Line will then get a bigger influence of the histogram filter and with this to the lane detection.
+ 
 
  
