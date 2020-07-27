@@ -114,7 +114,7 @@ And the third and last part calculates the vehicle position with respect to the 
 As last step, the computed results have to be displayed on the original image. Therefore, the function **draw** will take care of wrapping the detected lines back to the original full image and visualization them. Finally, the numerical calculations from step 6 will be written in function **text_image** into the final image.
 
  <figure>
- <img src="./output_images/material_for_readme/Drawning_Final_Result.png" width="360" alt="Final Result" />
+ <img src="./output_images/material_for_readme/Drawning_Final_Result.png" width="700" alt="Final Result" />
  <figcaption>
  <p></p> 
  <p style="text-align: center;"> Fig. 8.1: Visualized lane lines: The area between the detected lane lines is covered in green. The actual car relative position to the lane center and the curvature are displayed. </p> 
