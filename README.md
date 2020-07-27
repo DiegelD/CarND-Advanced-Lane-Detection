@@ -131,7 +131,9 @@ For checking the sanity, function **sanity_check**, a triple validation of the f
 The Project Example can be seen here: [Link](./output_videos/project_video.mp4). The Challenging video can be seen here: [Link](./output_videos/challenge_video.mp4).
 
 ## Discussion
-**Project Video** The Pipeline works quiet well for the video. The lanes are getting smooth detected and there is no jitter of the detected lines. Improvements: At the time, 40 seconds, the left line has an offset in the detection. For improving the parameters, the critical video part has been written to an image and run through the pipeline. The conclusion of this was that the pipeline detected the lane pretty well, without any offset. So, this is meaning that the parameters for the lane detection are working well. So, in a next step the smoothing over n-images could be reduced. So that the adaption would be faster to changing conditions.
+**Project Video** The Pipeline works quiet well for the video. The lanes are getting smooth detected and there is no jitter of the detected lines. Improvements:
+1) At the time, 40 seconds, the left line has an offset in the detection. For improving the parameters, the critical video part has been written to an image and run through the pipeline. The conclusion of this was that the pipeline detected the lane pretty well, without any offset. So, this is meaning that the parameters for the lane detection are working well. So, in a next step the smoothing over n-images could be reduced. So that the adaption would be faster to changing conditions.
+2) Using Morphological Transformations to make the pipeline more robust and to cancel the filter noise.
 
 **Challenge Video** The Pipeline works here also pretty smooth. However, the right lane line is getting hardly detected. Its visible that the lane detection is hitting/detecting areas with a high color gradient change. Like the shadow sun boarder, which is not the lane line.
 
