@@ -139,7 +139,11 @@ The Project Example can be seen here: [Link](./output_videos/project_video.mp4).
 
 Improvements:
 Two possible easy ways to make the pipeline more robust:
-1) Include an additional filter in the color space. To detect the lane color.
+1) Include an additional filter to contrast correction. 
+With `img = cv2.cvtColor(img, cv2.COLOR_RGB2YUV`
+`img[:,:,0]=cv2.equalizeHist(img[:,:,0]`
+`img = cv2.cvtColor(img, cv2.COLOR_YUV2RGB`
+
 2) Change the parameter setting of the function **Sobel__SSpace_pipeline** in two ways. First to increase the `sx_thresh=(lower,higher)` lower threshold of the sobel filter. This will force the filter to dismiss the darker regions of the image for the sobel filter. Second to decrease the lower s-channel threshold `s_thresh=(lower, higher)`. With this, even the lower saturated lane values will be detected. This is important for this video because the lane line saturation will then get a bigger influence of the histogram filter and with this to the lane detection. 
 
  
