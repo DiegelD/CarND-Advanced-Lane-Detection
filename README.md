@@ -139,7 +139,7 @@ The Project Example can be seen here: [Link](./output_videos/project_video.mp4).
 
 Improvements:
 Two possible easy ways to make the pipeline more robust:
-1) Include an additional filter to contrast correction. 
+1) Include an additional filter for contrast correction. 
 With `img = cv2.cvtColor(img, cv2.COLOR_RGB2YUV`
 `img[:,:,0]=cv2.equalizeHist(img[:,:,0]`
 `img = cv2.cvtColor(img, cv2.COLOR_YUV2RGB`
