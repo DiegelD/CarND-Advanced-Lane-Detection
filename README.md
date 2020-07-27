@@ -134,7 +134,13 @@ The Project Example can be seen here: [Link](./output_videos/project_video.mp4).
 **Project Video** The Pipeline works quiet well for the video. The lanes are getting smooth detected and there is no jitter of the detected lines. Improvements: At the time, 40 seconds, the left line has an offset in the detection. For improving the parameters, the critical video part has been written to an image and run through the pipeline. The conclusion of this was that the pipeline detected the lane pretty well, without any offset. So, this is meaning that the parameters for the lane detection are working well. So, in a next step the smoothing over n-images could be reduced. So that the adaption would be faster to changing conditions.
 
 **Challenge Video** The Pipeline works here also pretty smooth. However, the right lane line is getting hardly detected. Its visible that the lane detection is hitting/detecting areas with a high color gradient change. Like the shadow sun boarder, which is not the lane line.
-Improvements: To change the detection, its suggested to change the parameter setting of the function **Sobel__SSpace_pipeline** in two ways. First to increase the `sx_thresh=(lower,higher)` lower threshold of the sobel filter. This will force the filter to dismiss the darker regions of the image for the sobel filter. Second to decrease the lower s-channel threshold `s_thresh=(lower, higher)`. With this, even the lower saturated lane values will be detected. This is important for this video because the lane line saturation will then get a bigger influence of the histogram filter and with this to the lane detection. In addition, also, a mask that covers just the area of interest could be applied. This would improve the performance on straight ways but reduce the possibility to detect high curvatures. 
+
+Improvements:
+Two possible easy ways to make the pipeline more robust:
+1) Include an additional filter in the color space. To detect the lane color.
+2) Change the parameter setting of the function **Sobel__SSpace_pipeline** in two ways. First to increase the `sx_thresh=(lower,higher)` lower threshold of the sobel filter. This will force the filter to dismiss the darker regions of the image for the sobel filter. Second to decrease the lower s-channel threshold `s_thresh=(lower, higher)`. With this, even the lower saturated lane values will be detected. This is important for this video because the lane line saturation will then get a bigger influence of the histogram filter and with this to the lane detection. 
+
+ 
  
 
  
