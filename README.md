@@ -20,7 +20,7 @@ The steps of this project are the following:
 8) Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 9) **Video-Pipeline** 
 
-###Directories and project material
+*Directories and project material:*
 The images for camera calibration are stored in the folder called `camera_cal`.  The images in `test_images` are for testing your pipeline on single frames.
 
 *Output:* In the folder `cam_params` are the camera parameters saved. The output of the camera calibration process is stored under `output_images/camera_cal`. And all the other images for developing the pipeline are saved in `output_images`.
